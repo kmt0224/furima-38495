@@ -2,7 +2,8 @@ class ItemsController < ApplicationController
   before_action :move_to_new_user_session, except: [:index]
 
   def index
-    @items = Item.includes(:user)
+    # @items = Item.includes(:user)
+    # 商品機能一覧実装範囲
   end
 
   def new
