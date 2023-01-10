@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :date_of_shipment
 
-  validates :image,               presence: true
+  validates :image,               presence: true , content_type: [:png, :jpg, :jpeg]
   validates :item,                presence: true
   validates :explanation,         presence: true
   validates :category_id,         presence: true, numericality: { other_than: 1, message: "can't be blank" }
