@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_17_213050) do
+ActiveRecord::Schema.define(version: 2023_01_25_204927) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,16 +33,17 @@ ActiveRecord::Schema.define(version: 2023_01_17_213050) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "adresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
     t.string "municipality", null: false
     t.string "house_number", null: false
     t.string "building_name", null: false
     t.string "phone_number", null: false
-    t.string "timestamps", null: false
     t.bigint "item_order_id", null: false
-    t.index ["item_order_id"], name: "index_adresses_on_item_order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_order_id"], name: "index_addresses_on_item_order_id"
   end
 
   create_table "item_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_213050) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "adresses", "item_orders"
+  add_foreign_key "addresses", "item_orders"
   add_foreign_key "item_orders", "items"
   add_foreign_key "item_orders", "users"
   add_foreign_key "items", "users"
