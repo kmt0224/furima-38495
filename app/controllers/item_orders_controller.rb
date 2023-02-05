@@ -1,6 +1,8 @@
 class ItemOrdersController < ApplicationController
   before_action :move_to_new_user_session
   before_action :move_to_item_index
+  before_action :exist_item_move_to_index
+  
   def index
     @item = Item.find(params[:item_id])
     @item_order_address = ItemOrderAddress.new
@@ -36,6 +38,13 @@ class ItemOrdersController < ApplicationController
 
   def item_order_params
     params.require(:item_order_address).permit(:postal_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
+  end
+
+  def exist_item_move_to_index
+    @item = Item.find(params[:item_id])
+    if ItemOrder.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
   end
 
 end
