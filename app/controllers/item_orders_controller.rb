@@ -3,16 +3,23 @@ class ItemOrdersController < ApplicationController
   before_action :move_to_item_index
   def index
     @item = Item.find(params[:item_id])
+    @item_order_address = ItemOrderAddress.new
   end
 
   def create
-    @item_order = ItemOrder.new(
-      user_id: current_user.id,
-      item_id: params[:item_id]
-    )
-    @item_order.save
-    Address.create(address_params)
-    redirect_to root_path
+    @item_order_address = ItemOrderAddress.new(item_order_params)
+    if @item_order_address.valid?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: item_order_params[:token],    # カードトークン
+        currency: 'jpy'                 # 通貨の種類（日本円）
+      )
+      @item_order_address.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
@@ -27,8 +34,8 @@ class ItemOrdersController < ApplicationController
     end
   end
 
-  def address_params
-    params.permit(:postal_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number).merge(item_order_id: @item_order.id)
+  def item_order_params
+    params.require(:item_order_address).permit(:postal_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
   end
 
 end
