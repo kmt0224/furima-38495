@@ -1,10 +1,10 @@
 class ItemOrdersController < ApplicationController
+  before_action :set_item
   before_action :move_to_new_user_session
   before_action :move_to_item_index
   before_action :exist_item_move_to_index
-  
+
   def index
-    @item = Item.find(params[:item_id])
     @item_order_address = ItemOrderAddress.new
   end
 
@@ -30,7 +30,6 @@ class ItemOrdersController < ApplicationController
   end
 
   def move_to_item_index
-    @item = Item.find(params[:item_id])
     if current_user.id == @item.user_id
       redirect_to root_path
     end
@@ -41,10 +40,14 @@ class ItemOrdersController < ApplicationController
   end
 
   def exist_item_move_to_index
-    @item = Item.find(params[:item_id])
     if ItemOrder.exists?(item_id: @item.id)
       redirect_to root_path
     end
   end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 
 end
