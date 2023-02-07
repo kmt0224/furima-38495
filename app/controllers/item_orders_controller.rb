@@ -11,16 +11,11 @@ class ItemOrdersController < ApplicationController
   def create
     @item_order_address = ItemOrderAddress.new(item_order_params)
     if @item_order_address.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: item_order_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
-      )
+      pay_item
       @item_order_address.save
-      redirect_to root_path
+      return redirect_to root_path
     else
-      render :index
+      render 'index'
     end
   end
 
@@ -48,6 +43,16 @@ class ItemOrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: item_order_params[:token],
+      currency: 'jpy'
+    )
+  end
+
 
 
 end
