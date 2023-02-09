@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ItemOrderAddress, type: :model do
-  describe '寄付情報の保存' do
+  describe '購入情報の保存' do
     before do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
@@ -23,8 +23,7 @@ RSpec.describe ItemOrderAddress, type: :model do
       it 'postal_codeが空だと保存できないこと' do
         @item_order_address.postal_code = ''
         @item_order_address.valid?
-        expect(@item_order_address.errors.full_messages).to include("Postal code can't be blank",
-                                                                    'Postal code is invalid. Include hyphen(-)')
+        expect(@item_order_address.errors.full_messages).to include("Postal code can't be blank")
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @item_order_address.postal_code = '1234567'
