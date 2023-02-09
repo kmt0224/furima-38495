@@ -56,9 +56,7 @@ class ItemsController < ApplicationController
   end
 
   def exist_item_move_to_index
-    if ItemOrder.exists?(item_id: @item.id)
-      redirect_to root_path
-    end
+    redirect_to root_path if ItemOrder.exists?(item_id: @item.id)
   end
 
   def set_item
