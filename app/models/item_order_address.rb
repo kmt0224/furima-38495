@@ -13,7 +13,7 @@ class ItemOrderAddress
     validates :house_number
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid.' }
   end
-    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }, allow_blank: true
+  validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }, allow_blank: true
 
   def save
     item_order = ItemOrder.create(
