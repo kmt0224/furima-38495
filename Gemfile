@@ -77,3 +77,4 @@ gem 'payjp'
 # gem "aws-sdk-s3", require: false
 gem 'devise-two-factor'
 gem 'rqrcode'
+gem 'net-http'
