@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   resources :items, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :item_orders, only: [:index, :create]
   end
-  resource :two_factor_auth, only: [:new, :create, :destroy]
+  resource :two_factor_auth, only: [:new, :create, :destroy, :show]
 end
