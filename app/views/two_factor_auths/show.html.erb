@@ -1,0 +1,7 @@
+<% if @error %>
+  <div><%= @error %></div>
+<% end %>
+
+<div><%= raw @qr_code %></div>
+
+<%= button_to "認証画面へ", new_two_factor_auth_path, method: :get %>
