@@ -75,6 +75,6 @@ gem 'image_processing', '~> 1.2'
 gem 'active_storage_validations'
 gem 'payjp'
 # gem "aws-sdk-s3", require: false
+gem 'net-http'
 gem 'devise-two-factor'
 gem 'rqrcode'
-gem 'net-http'
