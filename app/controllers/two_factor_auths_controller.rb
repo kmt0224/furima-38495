@@ -37,7 +37,7 @@ class TwoFactorAuthsController < ApplicationController
 
   private
   def build_qr_code
-    label = "DeviseTwo2"
+    label = "Furima-38495"
     issuer ="#{current_user[:email]}"
     uri = current_user.otp_provisioning_uri(label, issuer: issuer)
     qrcode = RQRCode::QRCode.new(uri)
