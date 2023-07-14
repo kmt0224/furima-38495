@@ -42,7 +42,7 @@ class Users::SessionsController < Devise::SessionsController
     if user_params[:email]
       if user.valid_password?(user_params[:password])
         session[:otp_user_id] = user.id
-        render 'users/sessions/two_factor' and return
+        render 'devise/sessions/two_factor' and return
       end
     elsif user_params[:otp_attempt].present? && session[:otp_user_id]
       if user.validate_and_consume_otp!(user_params[:otp_attempt])
