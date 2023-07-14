@@ -1,0 +1,11 @@
+<h1>Enable 2FA</h1>
+
+<%= button_to "QRコードを表示", two_factor_auth_path, method: :get %>
+<%= form_tag two_factor_auth_path do %>
+  <div class="field">
+    <%= label_tag :otp_attempt %><br />
+    <%= text_field_tag :otp_attempt %>
+  </div>
+
+  <%= submit_tag :submit %>
+<% end %>
