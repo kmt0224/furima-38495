@@ -1,0 +1,16 @@
+<%= render "shared/second-header"%>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+  <h1 class='form-header-text'>
+    認証コード入力
+  </h1>
+
+  <div class="field">
+    <%= f.label :otp_attempt %><br />
+    <%= f.text_field :otp_attempt %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "送信" %>
+  </div>
+<% end %>
