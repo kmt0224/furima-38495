@@ -52,7 +52,7 @@ GoogleAuthenticator等のアプリでQRコードを読み取ります。<br>
 <br>
 
 出品が完了すると、トップページ下部に商品リストが表示されます。<br>
-商品をクリックすると、商品詳細ページに遷ります<br>
+商品をクリックすると、商品詳細ページに遷ります。<br>
 <img width="1436" alt="出品リスト" src="https://github.com/kmt0224/furima-38495/assets/115336998/af073fb8-5f5f-4e68-9b4f-008689a99df0"><br>
 <br>
 <br>
@@ -62,7 +62,7 @@ GoogleAuthenticator等のアプリでQRコードを読み取ります。<br>
 <br>
 <br>
 
-内容を変更し、変更するボタンをクリックすると、商品内容の変更ができます。<br>
+編集画面では内容を変更し、変更するボタンをクリックすると、商品内容の変更ができます。<br>
 もどるをクリックすると、変更は破棄され商品詳細画面に戻ります。<br>
 <img width="1435" alt="商品編集画面" src="https://github.com/kmt0224/furima-38495/assets/115336998/6dc87186-b58a-4773-a663-20b403d298be"><br>
 <br>
@@ -70,15 +70,27 @@ GoogleAuthenticator等のアプリでQRコードを読み取ります。<br>
 <br>
 
 ### 購入<br>
+他人の出品した商品をクリックすると、商品詳細画面に遷り、商品の購入ができます。<br>
+<img width="1435" alt="購入者商品詳細画面" src="https://github.com/kmt0224/furima-38495/assets/115336998/2c26c80e-5d6b-4e54-aa91-8f74a9dc7c72"><br>
+<br>
+<br>
 
+購入画面では、必要事項を入力すると商品の購入ができます。<br>
+※サンプルアプリなのでカード情報は下記の通りでご利用できます。<br>
+|      カード番号       | 有効期限 | CVC |
+|-------------------------------------|
+| 4242 4242 4242 4242 |  12/24  | 123 |
+<img width="1425" alt="商品購入画面" src="https://github.com/kmt0224/furima-38495/assets/115336998/d682719f-1dc0-4c9f-a7ad-cbb45f4a4f2e"><br>
+<img width="1426" alt="商品購入画面2" src="https://github.com/kmt0224/furima-38495/assets/115336998/00ba8d94-81e6-4604-81a4-e86a4756b527"><br>
+<br>
+<br>
 
-
-
-
-
-
-
-
+商品購入が終了するとsold outのラベルがつきます。<br>
+<img width="1431" alt="購入済み商品" src="https://github.com/kmt0224/furima-38495/assets/115336998/b234946e-971d-4dc0-94e2-30cc98ac332e"><br>
+<br>
+<br>
+<br>
+<br>
 
 ## DB設計
 <!-- usersテーブル -->
