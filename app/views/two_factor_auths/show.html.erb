@@ -1,0 +1,24 @@
+<%= render "shared/second-header"%>
+
+<div class="qr-main">
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <h1 class='form-header-text'>
+        QRコード
+      </h1>
+    </div>
+    <div class='qr-wrap'>
+      <div class='qr-code-wrap'>
+        <div class='qr-code'><%= raw @qr_code %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="qr">
+  <div class="qr-buttons">
+  <%= button_to "認証画面へ", new_two_factor_auth_path, class:"qr-button", method: :get %>
+  </div>
+</div>
+
+<%= render "shared/second-footer"%>

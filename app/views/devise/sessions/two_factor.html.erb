@@ -1,0 +1,27 @@
+<%= render "shared/second-header"%>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post, html: {class: 'registration-main'}) do |f| %>
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      認証コード入力
+    </h1>
+  </div>
+  <% if @error %>
+    <div class='login-flash-message'>
+      <%= @error %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">認証コード</label>
+    </div>
+    <%= f.text_field :otp_attempt %>
+  </div>
+  <div class='login-btn'>
+    <%= f.submit "送信", class:"login-red-btn" %>
+  </div>
+</div>
+<% end %>
+
+<%= render "shared/second-footer"%>

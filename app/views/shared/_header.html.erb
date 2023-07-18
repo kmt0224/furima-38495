@@ -17,7 +17,12 @@
     <ul class='lists-right'>
       <% if user_signed_in? %>
         <li><%= link_to current_user.nick_name, "#", class: "user-nickname" %></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
+        <% if current_user.otp_required_for_login %>
+          <%= link_to "2要素認証を解除する", two_factor_auth_path, method: :delete, class: "logout" %>
+        <% else %>
+          <%= link_to "2要素認証を登録する", new_two_factor_auth_path, method: :get, class: "logout" %>
+        <% end %>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
       <% else %>
         <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
         <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
