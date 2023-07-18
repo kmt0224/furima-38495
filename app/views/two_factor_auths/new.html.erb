@@ -1,11 +1,34 @@
-<h1>Enable 2FA</h1>
+<%= render "shared/second-header"%>
 
-<%= button_to "QRコードを表示", two_factor_auth_path, method: :get %>
-<%= form_tag two_factor_auth_path do %>
-  <div class="field">
-    <%= label_tag :otp_attempt %><br />
+<%= form_tag two_factor_auth_path, class: 'registration-main' do %>
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      認証コードを入力
+    </h1>
+  </div>
+  <% if @error %>
+    <div class='login-flash-message'>
+      <%= @error %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">認証コード</label>
+    </div>
     <%= text_field_tag :otp_attempt %>
   </div>
-
-  <%= submit_tag :submit %>
+  <div class='login-btn'>
+    <%= submit_tag :送信, class:"login-red-btn" %>
+  </div>
+</div>
 <% end %>
+
+<div class="qr">
+  <div class="qr-buttons">
+    <%= button_to "QRコードを表示", two_factor_auth_path, class:"qr-button", method: :get %>
+  </div>
+</div>
+
+
+<%= render "shared/second-footer"%>

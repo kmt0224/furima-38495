@@ -16,13 +16,11 @@ class TwoFactorAuthsController < ApplicationController
 
     else
       @error = 'Invalid pin code'
-      @qr_code = build_qr_code
 
       render 'new'
     end
   end
   def show
-    @error = 'Invalid pin code'
     @qr_code = build_qr_code
   end
   def destroy
@@ -45,7 +43,7 @@ class TwoFactorAuthsController < ApplicationController
       offset: 0,
       color: '000',
       shape_rendering: 'crispEdges',
-      module_size: 2
+      module_size: 4
     ).html_safe
   end
 end
