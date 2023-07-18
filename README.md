@@ -1,3 +1,47 @@
+# Furimaアプリ<br>
+<br>
+<br>
+<br>
+
+## 使い方<br>
+### 会員登録<br>
+____________________________________________________________________<br>
+新規登録ボタンから会員登録ができます<br>
+<img width="1436" alt="トップページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/02c83e1d-9325-42c3-8292-436448f4dc3b"><br>
+<br>
+<br>
+
+会員情報を正しく入力し登録します<br>
+<img width="1417" alt="会員情報入力ページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/3236954e-51ad-4a60-9549-eea43a625557"><br>
+<br>
+<br>
+
+ログイン後、2要素認証の登録ができます<br>
+<img width="1422" alt="ログイン後トップページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/f893265e-95fe-40de-9642-0f90e309c687"><br>
+<br>
+<br>
+
+QRコードを表示し、認証コードを取得します<br>
+<img width="1429" alt="2要素認証登録ページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/647e12d6-ab65-4cee-8488-09049c2a2a0c"><br>
+<br>
+<br>
+
+GoogleAuthenticator等のアプリでQRコードを読み取ります<br>
+認証コードを取得したら、認証画面へ戻り取得したコードを入力します<br>
+<img width="1428" alt="QRコード表示ページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/448e80b3-9abf-4ce5-89cc-c47433b6f8ba"><br>
+<br>
+<br>
+
+2要素認証の登録が完了し、トップページへ戻ります<br>
+2要素認証は解除することもできます<br>
+<img width="1434" alt="2要素認証登録後トップページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/a1b24475-3e28-45dc-b5a8-403686b3c2dd"><br>
+<br>
+<br>
+
+
+
+
+## DB設計
 <!-- usersテーブル -->
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
