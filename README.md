@@ -5,9 +5,9 @@
 
 ## 使い方<br>
 ### 会員登録<br>
-____________________________________________________________________<br>
 新規登録ボタンから会員登録ができます<br>
 <img width="1436" alt="トップページ" src="https://github.com/kmt0224/furima-38495/assets/115336998/02c83e1d-9325-42c3-8292-436448f4dc3b"><br>
+<img width="1430" alt="会員情報入力ページ2" src="https://github.com/kmt0224/furima-38495/assets/115336998/bc2aa0b4-429b-4b76-b709-ced9f30a42e6"><br>
 <br>
 <br>
 
