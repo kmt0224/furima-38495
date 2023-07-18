@@ -190,6 +190,8 @@ GEM
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.23.0)
     parser (3.2.2.3)
@@ -197,6 +199,7 @@ GEM
       racc
     payjp (0.0.10)
       rest-client (~> 2.0)
+    pg (1.4.6)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -360,6 +363,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   active_hash
@@ -384,6 +388,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4)
   net-http
   payjp
+  pg
   pry-rails
   puma (~> 3.11)
   rails (~> 6.0.0)
