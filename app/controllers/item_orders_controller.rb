@@ -3,6 +3,7 @@ class ItemOrdersController < ApplicationController
   before_action :move_to_new_user_session
   before_action :move_to_item_index
   before_action :exist_item_move_to_index
+  before_action :authenticate_with_two_factor_register
 
   def index
     @item_order_address = ItemOrderAddress.new
@@ -51,4 +52,13 @@ class ItemOrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def authenticate_with_two_factor_register
+    if user_signed_in? && (current_user.otp_required_for_login.nil? || current_user.otp_required_for_login == false)
+      current_user.otp_secret = User.generate_otp_secret(32)
+      current_user.save!
+      redirect_to new_two_factor_auth_path
+    end
+  end
+
 end
