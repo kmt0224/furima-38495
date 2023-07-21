@@ -1,5 +1,8 @@
 class TwoFactorAuthsController < ApplicationController
+  before_action :move_to_new_user_session
+  before_action :move_to_item_index
 
+  def new
   end
   def create
     if current_user.validate_and_consume_otp!(params[:otp_attempt])
@@ -40,4 +43,13 @@ class TwoFactorAuthsController < ApplicationController
       module_size: 4
     ).html_safe
   end
+
+  def move_to_new_user_session
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def move_to_item_index
+    redirect_to root_path if current_user.otp_required_for_login == true
+  end
+
 end
