@@ -30,27 +30,27 @@ class Users::SessionsController < Devise::SessionsController
   def authenticate_with_two_factor
     user_params = params.require(:user).permit(:email, :password, :remember_me, :otp_attempt)
 
-    if user_params[:email]
-      user = User.find_by(email: user_params[:email])
-    elsif user_params[:otp_attempt].present? && session[:otp_user_id]
+    if user_params[:otp_attempt].present? && session[:otp_user_id]
       user = User.find(session[:otp_user_id])
+    elsif user_params[:email]
+      user = User.find_by(email: user_params[:email])
     end
     self.resource = user
 
-    return unless user && user.otp_required_for_login
-
-    if user_params[:email]
+    if user_params[:otp_attempt].present? && session[:otp_user_id]
+      if user.validate_and_consume_otp!(user_params[:otp_attempt]) || user.invalidate_otp_backup_code!(user_params[:otp_attempt])
+        session.delete(:otp_user_id)
+        user.save!
+        sign_in(user)
+        redirect_to root_path
+      else
+        @error = 'Invalid two-factor code.'
+        render :two_factor
+      end    
+    elsif user_params[:email]
       if user.valid_password?(user_params[:password])
         session[:otp_user_id] = user.id
-        render 'devise/sessions/two_factor' and return
-      end
-    elsif user_params[:otp_attempt].present? && session[:otp_user_id]
-      if user.validate_and_consume_otp!(user_params[:otp_attempt])
-        session.delete(:otp_user_id)
-        sign_in(user) and return
-      else
-        flash.now[:alert] = 'Invalid two-factor code.'
-        render :two_factor and return
+        render 'devise/sessions/two_factor'
       end
     end
   end

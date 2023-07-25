@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :move_to_new_user_session, except: [:index, :show]
   before_action :move_to_index, only: [:edit, :destroy]
   before_action :exist_item_move_to_index, only: [:edit]
+  before_action :authenticate_with_two_factor_register
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -62,4 +63,13 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def authenticate_with_two_factor_register
+    if user_signed_in? && (current_user.otp_required_for_login.nil? || current_user.otp_required_for_login == false)
+      current_user.otp_secret = User.generate_otp_secret(32)
+      current_user.save!
+      redirect_to new_two_factor_auth_path
+    end
+  end
+
 end

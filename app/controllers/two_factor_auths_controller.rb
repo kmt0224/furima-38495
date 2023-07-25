@@ -1,18 +1,16 @@
 class TwoFactorAuthsController < ApplicationController
-  def new
-    unless current_user.otp_secret
-      current_user.otp_secret = User.generate_otp_secret(32)
-      current_user.save!
-    end
+  before_action :move_to_new_user_session
+  before_action :move_to_item_index, except:[:destroy, :create]
 
-    @qe_code = build_qr_code
+  def new
   end
   def create
-    if current_user.validate_and_consume_otp!(params[:otp_attempt])
+    if current_user.validate_and_consume_otp!(params[:otp_attempt]) || current_user.invalidate_otp_backup_code!(params[:otp_attempt])
       current_user.otp_required_for_login = true
+      @codes = current_user.generate_otp_backup_codes!
       current_user.save!
 
-      redirect_to root_path
+      render 'code'
 
     else
       @error = 'Invalid pin code'
@@ -46,4 +44,13 @@ class TwoFactorAuthsController < ApplicationController
       module_size: 4
     ).html_safe
   end
+
+  def move_to_new_user_session
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def move_to_item_index
+    redirect_to root_path if current_user.otp_required_for_login == true
+  end
+
 end

@@ -1,6 +1,6 @@
 <%= render "shared/second-header"%>
 
-<%= form_tag two_factor_auth_path, class: 'registration-main' do %>
+<%= form_with url: two_factor_auth_path, class: 'registration-main', local: true do |f| %>
 <div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
@@ -16,10 +16,10 @@
     <div class='form-text-wrap'>
       <label class="form-text">認証コード</label>
     </div>
-    <%= text_field_tag :otp_attempt %>
+    <%= f.text_field :otp_attempt %>
   </div>
   <div class='login-btn'>
-    <%= submit_tag :送信, class:"login-red-btn" %>
+    <%= f.submit '送信', class:"login-red-btn" %>
   </div>
 </div>
 <% end %>
