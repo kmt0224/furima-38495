@@ -5,11 +5,12 @@ class TwoFactorAuthsController < ApplicationController
   def new
   end
   def create
-    if current_user.validate_and_consume_otp!(params[:otp_attempt])
+    if current_user.validate_and_consume_otp!(params[:otp_attempt]) || current_user.invalidate_otp_backup_code!(params[:otp_attempt])
       current_user.otp_required_for_login = true
+      @codes = current_user.generate_otp_backup_codes!
       current_user.save!
 
-      redirect_to root_path
+      render 'code'
 
     else
       @error = 'Invalid pin code'
