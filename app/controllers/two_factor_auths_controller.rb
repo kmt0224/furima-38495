@@ -1,6 +1,6 @@
 class TwoFactorAuthsController < ApplicationController
   before_action :move_to_new_user_session
-  before_action :move_to_item_index
+  before_action :move_to_item_index, except:[:destroy, :create]
 
   def new
   end
