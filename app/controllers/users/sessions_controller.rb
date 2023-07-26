@@ -24,34 +24,28 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  prepend_before_action :authenticate_with_two_factor, only: [:create]
-
-  private
-  def authenticate_with_two_factor
-    user_params = params.require(:user).permit(:email, :password, :remember_me, :otp_attempt)
-
-    if user_params[:otp_attempt].present? && session[:otp_user_id]
-      user = User.find(session[:otp_user_id])
-    elsif user_params[:email]
-      user = User.find_by(email: user_params[:email])
-    end
-    self.resource = user
-
-    if user_params[:otp_attempt].present? && session[:otp_user_id]
-      if user.validate_and_consume_otp!(user_params[:otp_attempt]) || user.invalidate_otp_backup_code!(user_params[:otp_attempt])
-        session.delete(:otp_user_id)
-        user.save!
-        sign_in(user)
-        redirect_to root_path
-      else
-        @error = 'Invalid two-factor code.'
-        render :two_factor
-      end    
-    elsif user_params[:email]
-      if user.valid_password?(user_params[:password])
-        session[:otp_user_id] = user.id
-        render 'devise/sessions/two_factor'
+  def create
+    @user = User.find_by(email: params[:user][:email])
+    self.resource = @user
+      if @user.valid_password?(params[:user][:password])
+        session[:otp_user_id] = @user.id
+        redirect_to users_two_factor_path and return
       end
+  end
+
+  def new_two_factor
+  end
+
+  def create_two_factor
+    user = User.find(session[:otp_user_id])
+    if user.validate_and_consume_otp!(params[:otp_attempt]) || user.invalidate_otp_backup_code!(params[:otp_attempt])
+      session.delete(:otp_user_id)
+      user.save!
+      sign_in(user)
+      redirect_to root_path
+    else
+      @error = 'Invalid two-factor code.'
+      render :new_two_factor
     end
   end
 end
