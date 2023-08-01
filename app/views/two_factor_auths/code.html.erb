@@ -1,11 +1,17 @@
-<h1>バックアップコード</h1>
-<br>
-<div>
-  <ul>
+<%= render "shared/second-header"%>
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      バックアップコード
+    </h1>
+  </div>
+  <div class="form-group">
     <% @codes.each do |code| %>
       <li><%= code %></li>
     <% end %>
-  </ul>
+  </div>
+  <div class='login-btn'>
+    <%= link_to 'トップページへ', root_path %>
+  </div>
 </div>
-<br>
-<%= link_to 'トップページへ', root_path %>
+<%= render "shared/second-footer"%>
